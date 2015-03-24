@@ -1,0 +1,7 @@
+0	B.Tech
+1	B.Arch
+2	M.Tech
+3	MCA
+4	MBA
+5	MS
+6	Phd

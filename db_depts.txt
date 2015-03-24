@@ -1,0 +1,16 @@
+0	Architecture
+1	Chemical Engineering
+2	Chemistry
+3	Civil Engineering
+4	Computer Applications
+5	Computer Science And Engineering
+6	Electrical And Electronics Engineering
+7	Electronics And Communication Engineering
+8	Humanities
+9	Instrumentation And Control Engineering
+10	Mathematics
+11	Management Studies
+12	Mechanical Engineering
+13	Metallurgy and Materials Science Engineering
+14	Physics
+15	Production Engineering

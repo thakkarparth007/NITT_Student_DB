@@ -11,11 +11,20 @@ function error_exists() {
 function route() {
 	var hash = window.location.hash || "";
 
+	var match = hash.match(/^(#part\d)(&focus=([^&=]*))?$/);
+	var hash = match && match[1];
+	var elem_to_focus = match && match[3];
+
+	$('body').animate({
+		scrollTop: 0
+	});
 	if(hash == "#part3") {
 		if(_part3) {
 			$(".page").hide().filter("#page3").show();
-			//if(error_exists())
-			//	validateData(3, false);
+			$("#button_at_bottom")
+					.addClass("disabled")
+					.attr("href", "")
+					.html("Complete Part 3 to proceed");
 
 			$("#father_name").focus();
 		}
@@ -26,8 +35,10 @@ function route() {
 	else if(hash == "#part2") {
 		if(_part2) {
 			$(".page").hide().filter("#page2").show();
-			//if(error_exists())
-			//	validateData(2, false);
+			$("#button_at_bottom")
+					.addClass("disabled")
+					.attr("href", "")
+					.html("Complete Part 2 to proceed");
 
 			$("#email").focus();
 		}
@@ -42,6 +53,9 @@ function route() {
 	else {
 		window.location.hash = "#part1";
 	}
+
+	if(elem_to_focus)
+		$("#" + elem_to_focus).focus();
 }
 
 function activatePart(x) {
@@ -95,3 +109,26 @@ $(window).on("hashchange", route);
 
 route();
 $("#Submit").hide();
+
+$("#frm").on("submit", function() {
+	var elem_to_focus = null;
+	function focus(id) {
+		elem_to_focus = id;
+	}
+	if(!validateData(1,false, focus))
+	{
+		window.location.hash = "#part1&focus=" + elem_to_focus;
+		return false;
+	}
+	if(!validateData(2,false, focus))
+	{
+		window.location.hash = "#part2&focus=" + elem_to_focus;
+		return false;
+	}
+	if(!validateData(3,false, focus))
+	{
+		window.location.hash = "#part3&focus=" + elem_to_focus;
+		return false;
+	}
+	return true;
+});

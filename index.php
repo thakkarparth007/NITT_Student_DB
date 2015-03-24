@@ -1,12 +1,27 @@
 <?php
 
-include "validate_student_db.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . "db.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . "auth.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . "validate_student_db.php";
+
+authenticate();
 
 $err = "{}";
+
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	// a json string that contains the errors and 
 	// a status message (success/error)
 	$err = validate();
+}
+else {
+	$old_data = load_data($_SESSION['roll']);
+	if($old_data) {
+		$old_data['status'] = 'success';
+		$err = json_encode($old_data);
+	}
+	else {
+		$err = "{}";
+	}
 }
 
 ?>
@@ -15,7 +30,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>NITT Alumini</title>
+	<title>NITT Student DataBase</title>
 	<link rel="stylesheet" type="text/css" href="student_db_css/main.css">
 	<link rel="stylesheet" type="text/css" media="(max-width:600px)" href="student_db_css/main_vsmall.css">
 	<link rel="stylesheet" href="js/intl-tel-input/build/css/intlTelInput.css">
@@ -31,6 +46,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		</span>
 	</div>
 	<div id="tabContainer">
+		<div id="top_bar">
+			<div id="message">
+				National Institute of Technology Tiruchirappalli Student Database (For official use only). Please fill out the form carefully.
+			</div>
+
+			<a id="logout" href="logout.php">Logout</a>
+			<br class="clear">
+		</div>
+	
 		<div id="tabWrapper">
 			<a href="#part1" id="link_p1" class="tab active">Part 1<span class="exxtra"> : Academic</span> <span class="extra">Details</span></a>
 			<a href="#part2" id="link_p2" class="tab">Part 2<span class="exxtra"> : Contact</span> <span class="extra">Details</span></a>
@@ -58,6 +82,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		<p>
 			<label for="course">Course</label>
 			<select id="course" name="course">
+				<option>Select...</option>
 				<option>B.Tech</option>
 				<option>B.Arch</option>
 				<option>M.Tech</option>
@@ -73,6 +98,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		<p>
 			<label for="dept">Department</label>
 			<select class="input" id="dept" name="dept">
+				<option>Select...</option>
 				<option>Architecture</option>
 				<option>Chemical Engineering</option>
 				<option>Chemistry</option>
@@ -106,6 +132,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			<label for="hostel">Hostel</label>
 			<input type="number" name="roomno" id="roomno" placeholder="Room number">
 			<select name="hostel" id="hostel">
+				<option>Select...</option>
 				<option>Coral</option>
 				<option>Agate</option>
 				<option>Diamond</option>
@@ -171,29 +198,29 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			Current Residential Address
 		</p>
 		<p>
-			<label for="curr_addr1">Address Line 1</label>
-			<input name="curr_addr1" id="curr_addr1">
-			<span id="succcurr_addr1" class="success">✓ Valid</span><span id="errcurr_addr1" class="error"></span>
+			<label for="curr_addrline1">Address Line 1</label>
+			<input name="curr_addrline1" id="curr_addrline1">
+			<span id="succcurr_addrline1" class="success">✓ Valid</span><span id="errcurr_addrline1" class="error"></span>
 			<br>
 
-			<label for="curr_addr2">Address Line 2</label>
-			<input name="curr_addr2" id="curr_addr2">
-			<span id="succcurr_addr2" class="success">✓ Valid</span><span id="errcurr_addr2" class="error"></span>
+			<label for="curr_addrline2">Address Line 2</label>
+			<input name="curr_addrline2" id="curr_addrline2">
+			<span id="succcurr_addrline2" class="success">✓ Valid</span><span id="errcurr_addrline2" class="error"></span>
 			<br>
 
-			<label for="curr_addr3">City</label>
-			<input name="curr_addr3" id="curr_addr3">
-			<span id="succcurr_addr3" class="success">✓ Valid</span><span id="errcurr_addr3" class="error"></span>
+			<label for="curr_city">City</label>
+			<input name="curr_city" id="curr_city">
+			<span id="succcurr_city" class="success">✓ Valid</span><span id="errcurr_city" class="error"></span>
 			<br>
 			
-			<label for="curr_addr4">State/Region/Province</label>
-			<input name="curr_addr4" id="curr_addr4">
-			<span id="succcurr_addr4" class="success">✓ Valid</span><span id="errcurr_addr4" class="error"></span>
+			<label for="curr_state">State/Region/Province</label>
+			<input name="curr_state" id="curr_state">
+			<span id="succcurr_state" class="success">✓ Valid</span><span id="errcurr_state" class="error"></span>
 			<br>
 
-			<label for="curr_addr5">ZIP/Postal Code</label>
-			<input name="curr_addr5" id="curr_addr5">
-			<span id="succcurr_addr5" class="success">✓ Valid</span><span id="errcurr_addr5" class="error"></span>
+			<label for="curr_zip">ZIP/Postal Code</label>
+			<input name="curr_zip" id="curr_zip">
+			<span id="succcurr_zip" class="success">✓ Valid</span><span id="errcurr_zip" class="error"></span>
 			<br>
 			
 			<label for="curr_country">Country</label>
@@ -207,29 +234,29 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			Residential Address in India
 		</p>
 		<p id="p_india_addr">
-			<label for="india_addr1">Address Line 1</label>
-			<input name="india_addr1" id="india_addr1">
-			<span id="succindia_addr1" class="success">✓ Valid</span><span id="errindia_addr1" class="error"></span>
+			<label for="india_addrline1">Address Line 1</label>
+			<input name="india_addrline1" id="india_addrline1">
+			<span id="succindia_addrline1" class="success">✓ Valid</span><span id="errindia_addrline1" class="error"></span>
 			<br>
 
-			<label for="india_addr2">Address Line 2</label>
-			<input name="india_addr2" id="india_addr2">
-			<span id="succindia_addr2" class="success">✓ Valid</span><span id="errindia_addr2" class="error"></span>
+			<label for="india_addrline2">Address Line 2</label>
+			<input name="india_addrline2" id="india_addrline2">
+			<span id="succindia_addrline2" class="success">✓ Valid</span><span id="errindia_addrline2" class="error"></span>
 			<br>
 
-			<label for="india_addr3">City</label>
-			<input name="india_addr3" id="india_addr3">
-			<span id="succindia_addr3" class="success">✓ Valid</span><span id="errindia_addr3" class="error"></span>
+			<label for="india_city">City</label>
+			<input name="india_city" id="india_city">
+			<span id="succindia_city" class="success">✓ Valid</span><span id="errindia_city" class="error"></span>
 			<br>
 			
-			<label for="india_addr4">State/Region/Province</label>
-			<input name="india_addr4" id="india_addr4">
-			<span id="succindia_addr4" class="success">✓ Valid</span><span id="errindia_addr4" class="error"></span>
+			<label for="india_state">State/Region/Province</label>
+			<input name="india_state" id="india_state">
+			<span id="succindia_state" class="success">✓ Valid</span><span id="errindia_state" class="error"></span>
 			<br>
 
-			<label for="india_addr5">ZIP/Postal Code</label>
-			<input name="india_addr5" id="india_addr5">
-			<span id="succindia_addr5" class="success">✓ Valid</span><span id="errindia_addr5" class="error"></span>
+			<label for="india_zip">ZIP/Postal Code</label>
+			<input name="india_zip" id="india_zip">
+			<span id="succindia_zip" class="success">✓ Valid</span><span id="errindia_zip" class="error"></span>
 			<br>
 		</p>
 		<br>
@@ -365,9 +392,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		<input type="hidden" name="emergency_contact1" id="emergency_contact1">
 		<a id="button_at_bottom" class="disabled">Complete Part 1 to proceed</a>
 		<input type="submit" name="Submit" id="Submit" disabled="disabled" value="Submit">
-	
 	</form>
 
+	<div id="footer">
+		The information collected will be held confidential and will be used solely for campus development purposes.
+		<br>
+		Campus Development Programme, NIT Trichy.
+		<br>
+		Contact : Selvendran S - 9003243401, Shrinivas Reddy - 9159660683
+	</div>
 	<script type="text/javascript" src="js/jquery-min.js"></script>
 	<script type="text/javascript" src="js/student_db_route.js"></script>
 	<script type="text/javascript" src="js/student_db_details.js"></script>
@@ -430,6 +463,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$("#Submit").hide().attr("disabled","disabled");
 
 		validateData(1, false);
+	}
+	else if(__status && __status.status == 'success') {
+		for(var name in __status) {
+			if(name == "status") continue;
+			$("#"+name).val( __status[name] );
+		}		
 	}
 	</script>
 </body>

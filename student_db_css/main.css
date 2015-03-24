@@ -18,10 +18,51 @@ html, body {
 	left: 0;
 	right: 0;
 	top: 0;
-	height: 40px;
-	background: white;
+	height: 85px;
+	background: #92ee92;
 	box-shadow: 0 2px 10px 0 #000;
 	z-index: 1000;
+}
+
+#top_bar {
+	margin: 0 5% 0 5%;
+}
+
+#message {
+	padding: 11px;
+	display: inline-block;
+	float: left;
+	text-align: left;
+	color: black;
+	font-size: 19px;
+	width: 80%;
+}
+
+#footer {
+	text-align: center;
+	font-size: 18px;
+}
+
+a#logout {
+	float: right;
+	display: block;
+	background: green;
+	box-shadow: 0 0 5px 0 #000;
+	text-decoration: none;
+	padding: 10px;
+	color: white;
+	margin-top: -5px;
+	margin-right: 5px;
+	font-size: 19px;
+	-webkit-transition: all 0.25s;
+	-moz-transition: all 0.25s;
+	-o-transtion: all 0.25s;
+	-ms-transition: all 0.25s;
+	transition: all 0.25s;
+}
+
+#logout:hover {
+	box-shadow: 0 0 10px 0 #000;
 }
 
 #tabWrapper {
@@ -58,7 +99,7 @@ a.tab.active:hover, a.tab.active:focus {
 
 form {
 	border: 1px solid #109496;
-	margin: 40px 5% 40px 5%;
+	margin: 85px 5% 20px 5%;
 	padding-top: 10px;
 }
 
@@ -233,12 +274,63 @@ hr {
 	margin-right: 20%;
 }
 
+.clear {
+	clear: both;
+}
+
+@media(max-width: 1165px) {
+	#tabContainer {
+		/*background: red;*/
+	}
+	#top_bar {
+		font-size: 18px;
+	}
+	a.tab {
+		padding: 10px 0 10px 2%;
+	}
+}
+
+@media(max-width: 1110px) {
+	#tabContainer {
+		/*background: yellow;*/
+	}
+	#tabWrapper {
+		margin-top: 5px;
+	}
+	#message {
+		margin: 0;
+		margin-left: 5%;
+		font-size: 17px;
+		padding-top: 11px;
+	}
+}
+
+@media(max-width: 1000px) {
+	#tabContainer {
+		
+	}
+	#tabWrapper {
+		margin: 0;
+	}
+	#message {
+		margin: 0;
+		padding-top: 13px;
+	}
+}
+
+
 /* medium display */
 
 @media(max-width: 950px) {
 	#tabWrapper {
-		margin: 0 5% 0 5%;
-		/*background: red;*/
+		
+	}
+	#message {
+		font-size: 16px;
+		padding-top: 10px;
+		display: inline-block;;
+		float: left;
+		margin-right: 200px;
 	}
 
 	.extra {

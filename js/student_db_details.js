@@ -141,7 +141,7 @@ var part2 = [
 	}
 },
 {
-	name: "curr_addr1",
+	name: "curr_addrline1",
 	readable_name: "Address Line 1",
 	type: "text",
 	required: true,
@@ -152,7 +152,7 @@ var part2 = [
 	}
 },
 {
-	name: "curr_addr2",
+	name: "curr_addrline2",
 	readable_name: "Address Line 2",
 	type: "text",
 	required: true,
@@ -163,7 +163,7 @@ var part2 = [
 	}
 },
 {
-	name: "curr_addr3",
+	name: "curr_city",
 	readable_name: "City",
 	type: "text",
 	required: true,
@@ -174,7 +174,7 @@ var part2 = [
 	}
 },
 {
-	name: "curr_addr4",
+	name: "curr_state",
 	readable_name: "State",
 	type: "text",
 	required: true,
@@ -185,7 +185,7 @@ var part2 = [
 	}
 },
 {
-	name: "curr_addr5",
+	name: "curr_zip",
 	readable_name: "ZIP Code",
 	type: "text",
 	required: true,
@@ -207,7 +207,7 @@ var part2 = [
 	}
 },
 {
-	name: "india_addr1",
+	name: "india_addrline1",
 	readable_name: "Address Line 1",
 	type: "text",
 	required: true,
@@ -218,7 +218,7 @@ var part2 = [
 	}
 },
 {
-	name: "india_addr2",
+	name: "india_addrline2",
 	readable_name: "Address Line 2",
 	type: "text",
 	required: true,
@@ -229,7 +229,7 @@ var part2 = [
 	}
 },
 {
-	name: "india_addr3",
+	name: "india_city",
 	readable_name: "City",
 	type: "text",
 	required: true,
@@ -240,7 +240,7 @@ var part2 = [
 	}
 },
 {
-	name: "india_addr4",
+	name: "india_state",
 	readable_name: "State",
 	type: "text",
 	required: true,
@@ -251,7 +251,7 @@ var part2 = [
 	}
 },
 {
-	name: "india_addr5",
+	name: "india_zip",
 	readable_name: "ZIP Code",
 	type: "text",
 	required: true,

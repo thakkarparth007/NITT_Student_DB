@@ -15,12 +15,16 @@ description:
 TODO : finish the validation functions.
 		push stuff in the db
 		login page
-		check if roomno,hostel errors are managed properly
+
+		BLOOD GROUP!!!!!
 */
+
+require_once __DIR__ . DIRECTORY_SEPARATOR . "db.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . "DB_Config.php";
 
 $max_photo_size = 1048576;	// 1 MB
 $upload_required = true;
-$upload_dir = "C:/wamp/www/student_db/images/";
+$upload_dir = __DIR__ . DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR;
 $mime_images = array("image/jpeg", "image/pjpeg", "image/png");
 
 function _validate_name($name) {
@@ -56,8 +60,9 @@ function validate_roll() {
 	if(!preg_match("/^\d{9}$/", $roll))
 		return ["Enter a valid roll number",false];
 
-	// validate with database
-	
+	if($roll != $_SESSION['roll'])
+		force_logout();
+
 	return [false,$roll];
 }
 function validate_course() {
@@ -77,9 +82,9 @@ function validate_dept() {
 	return [false,$dept];
 }
 function validate_dob() {
-	$dob = sanitize_input($_POST['dob']);
+	$dob1 = sanitize_input($_POST['dob']);
 	
-	$dob = new DateTime($dob);
+	$dob = new DateTime($dob1);
 	if(!$dob)
 		return ["Enter a valid date of birth",false];
 
@@ -93,7 +98,7 @@ function validate_dob() {
 	if($dob->getTimeStamp() > $lower_bound->getTimeStamp())
 		return ["Enter a valid date of birth",false];
 
-	return [false,$dob];
+	return [false,$dob1];
 }
 function validate_roomno() {
 	$roomno = sanitize_input($_POST['roomno']);
@@ -103,7 +108,7 @@ function validate_roomno() {
 
 	return [false,$roomno];
 }
-// if successful, returns something like : [false, "29 Coral"]
+// joins the room number and the hostel name and returs the same
 function validate_hostel() {
 	$hostel_error = false;
 	$room_error = false;
@@ -118,14 +123,14 @@ function validate_hostel() {
 		$hostel_error = true;
 
 	$err = "Enter a valid";
-	if($hostel_error && $room_err)
+	if($hostel_error && $room_error)
 		$err .= " room number and hostel";
 	else if($hostel_error)
 		$err .= " hostel";
 	else if($room_error)
 		$err .= " room number";
 	else
-		return [false, $roomno . ", " . $hostel];
+		return [false, "$roomno, $hostel"];
 
 	return [$err,false];
 }
@@ -177,22 +182,22 @@ function validate_sec_contact() {
 }
 // careful with return value
 function validate_curr_addr() {
-	$add1 = sanitize_input($_POST['curr_addr1']);
-	$add2 = sanitize_input($_POST['curr_addr2']);
-	$add3 = sanitize_input($_POST['curr_addr3']);
-	$add4 = sanitize_input($_POST['curr_addr4']);
-	$add5 = sanitize_input($_POST['curr_addr5']);
+	$add1 = sanitize_input($_POST['curr_addrline1']);
+	$add2 = sanitize_input($_POST['curr_addrline2']);
+	$add3 = sanitize_input($_POST['curr_city']);
+	$add4 = sanitize_input($_POST['curr_state']);
+	$add5 = sanitize_input($_POST['curr_zip']);
 	$country = sanitize_input($_POST['curr_country']);
 	
-	$err['curr_addr1']
+	$err['curr_addrline1']
 		= $add1 == "" ? ["Address Line 1 is required",false] : [false, $add1];
-	$err['curr_addr2'] 
+	$err['curr_addrline2'] 
 		= $add2 == "" ? ["Address Line 2 is required",false] : [false, $add2];
-	$err['curr_addr3']
+	$err['curr_city']
 		= $add3 == "" ? ["City name is required",false] : [false, $add2];
-	$err['curr_addr4']
+	$err['curr_state']
 		= $add4 == "" ? ["State name is required",false] : [false, $add3];
-	$err['curr_addr5']
+	$err['curr_zip']
 		= $add5 == "" ? ["ZIP Code is required",false] : [false, $add4];
 	$err['curr_country']
 		= $country == "" ? ["Country name is required",false] : [false, $country];
@@ -200,30 +205,22 @@ function validate_curr_addr() {
 	return $err;
 }
 // be careful with the return value
-// returns false if the country is india
-// otherwise, returns the same datatype as returned by validate_curr_addr
-function validate_india_addr() {
-	$country = sanitize_input($_POST['curr_country']);
-	
-	if(strtolower($country) == 'india') {
-		return false;
-	}
+function validate_india_addr() {	
+	$add1 = sanitize_input($_POST['india_addrline1']);
+	$add2 = sanitize_input($_POST['india_addrline2']);
+	$add3 = sanitize_input($_POST['india_city']);
+	$add4 = sanitize_input($_POST['india_state']);
+	$add5 = sanitize_input($_POST['india_zip']);
 
-	$add1 = sanitize_input($_POST['india_addr1']);
-	$add2 = sanitize_input($_POST['india_addr2']);
-	$add3 = sanitize_input($_POST['india_addr3']);
-	$add4 = sanitize_input($_POST['india_addr4']);
-	$add5 = sanitize_input($_POST['india_addr5']);
-	
-	$err['india_addr1']
+	$err['india_addrline1']
 		= $add1 == "" ? ["Address Line 1 is required",false] : [false, $add1];
-	$err['india_addr2'] 
+	$err['india_addrline2'] 
 		= $add2 == "" ? ["Address Line 2 is required",false] : [false, $add2];
-	$err['india_addr3']
+	$err['india_city']
 		= $add3 == "" ? ["City name is required",false] : [false, $add2];
-	$err['india_addr4']
+	$err['india_state']
 		= $add4 == "" ? ["State name is required",false] : [false, $add3];
-	$err['india_addr5']
+	$err['india_zip']
 		= $add5 == "" ? ["ZIP Code is required",false] : [false, $add4];
 
 	return $err;
@@ -279,6 +276,21 @@ function validate_emergency_contact() {
 	$contact = sanitize_input($_POST['emergency_contact1']);
 	return _validate_contact($contact);
 }
+function validate_bloodgrp() {
+	$bloodgrp = sanitize_input($_POST['bloodgrp']);
+	$re = "/^A\+|A\-|O\+|O\-|B\+|B\-|AB\+|AB\-|A1\+|A1\-|A2\+|A2\-|A1B\+|A1B\-|A2B\+|A2B\-|B1\+$/";
+	if(!preg_match($re, $bloodgrp))
+		return ["Enter a valid blood group", false];
+
+	return [false, $bloodgrp];
+}
+function validate_donate() {
+	$donate = sanitize_input($_POST['donate']);
+	if(strtolower($donate) != 'yes' && strtolower($donate) != 'no')
+		return ["Please tell if you are willing to donate blood", false];
+
+	return [false, $donate];
+}
 
 
 function move_photo() {
@@ -306,23 +318,21 @@ function validate() {
 	$err['dept'] 		= validate_dept();
 	$err['dob'] 		= validate_dob();
 	$err['hostel'] 		= validate_hostel();
+	$err['hostel'] 		= validate_hostel();
 	$err['photo'] 		= validate_photo();
 
 	// page 2
 	$err['email']		= validate_email();
 	$err['contact'] 	= validate_contact();
 	$err['sec_contact'] = validate_sec_contact();
-
 	// curr_addr
 	$curr_addr_err = validate_curr_addr();
 	foreach ($curr_addr_err as $key => $value) {
 		$err[$key] = $value;
 	}
 	$india_addr_err = validate_india_addr();
-	if($india_addr_err) {
-		foreach ($india_addr_err as $key => $value) {
-			$err[$key] = $value;
-		}
+	foreach ($india_addr_err as $key => $value) {
+		$err[$key] = $value;
 	}
 	$err['nationality'] = validate_nationality();
 
@@ -336,30 +346,43 @@ function validate() {
 	$err['emergency_name'] 	= validate_emergency_name();
 	$err['emergency_relation'] 	= validate_emergency_relation();
 	$err['emergency_contact'] 	= validate_emergency_contact();
+	$err['bloodgrp']		= validate_bloodgrp();
+	$err['donate']			= validate_donate();
 
 	$prob = false;
-	foreach($err as $name => $val) {
-		if($val[0]) {
+	foreach($err as $name => $value) {
+		if($value[0]) {
 			$prob = true;
 			break;
 		}
 	}
 
 	if(!$prob) {
-		$err["status"] = "success";
+		//$err["status"] = "success";
 		// move the photo only if everything else was successful.
-		move_photo();
-		header('Location: success.php');
+		$data = [];
+		foreach ($err as $key => $value) {
+			$data[$key] = $value[1];
+		}
+		unset($data['photo']);
+		if(insert_in_db($data)) {
+			move_photo();
+			header('Location: success.php');
+		}
+		else {
+			$err['status'] = 'error';
+		}
 	}
 	else
 		$err["status"] = "error";
 
 	$err_to_be_shown = [];
 	foreach ($err as $key => $value) {
-		$err_to_be_shown[$key] = $val[0];
+		$err_to_be_shown[$key] = $value[0];
 	}
+	$err_to_be_shown['status'] = 'error';	// required because in the above loop, 'status' takes the value of 'e'
 	$err_to_be_shown = json_encode($err_to_be_shown);
+
 	return $err_to_be_shown;
 }
-
 ?>

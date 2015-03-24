@@ -18,19 +18,24 @@ function get_part_obj(part) {
 					 : part == 2 ? part2
 					 			 : part3;	
 }
-function validateData(part, silent) {
+function validateData(part, silent, cb) {
 	var error = false;
 	var part_obj = get_part_obj(part);
 	var part_valid = get_part_valid_object(part);
 
 	silent = silent === undefined ? true : silent;
 
+	var first_src_of_err = null;
+
 	for(var i in part_obj) {
 		validate(part, part_obj[i], silent);
-		if(!part_valid[ part_obj[i].name ])
+		if(!part_valid[ part_obj[i].name ]) {
+			first_src_of_err = part_obj[i].name;
 			error = true;
+		}
 	}
 
+	typeof cb == "function" && cb(first_src_of_err);
 	return !error;
 }
 
@@ -64,7 +69,7 @@ function validate(part, field, silent) {
 			
 			$("#err" + name)
 				.show()
-				.html("This data is required");
+				.html(r_name + " is required");
 		}
 		part_valid[name] = 0;
 	}
@@ -122,20 +127,20 @@ $("#curr_country").on("blur change", function() {
 	if(this.value.toLowerCase() == "india")
 	{
 		$("#p_india_addr,#p_india_addr_label,#hr_following_india_addr").hide();
-		$("#india_addr1").val( $("#curr_addr1").val() );
-		$("#india_addr2").val( $("#curr_addr2").val() );
-		$("#india_addr3").val( $("#curr_addr3").val() );
-		$("#india_addr4").val( $("#curr_addr4").val() );
-		$("#india_addr5").val( $("#curr_addr5").val() );
+		$("#india_addrline1").val( $("#curr_addrline1").val() );
+		$("#india_addrline2").val( $("#curr_addrline2").val() );
+		$("#india_city").val( $("#curr_city").val() );
+		$("#india_state").val( $("#curr_state").val() );
+		$("#india_zip").val( $("#curr_zip").val() );
 		$("#nationality").val("Indian");
 	}
 	else {
 		$("#p_india_addr,#p_india_addr_label,#hr_following_india_addr").show();
-		$("#india_addr1").val("").focus();
-		$("#india_addr2").val("");
-		$("#india_addr3").val("")
-		$("#india_addr4").val("")
-		$("#india_addr5").val("")
+		$("#india_addrline1").val("").focus();
+		$("#india_addrline2").val("");
+		$("#india_city").val("")
+		$("#india_state").val("")
+		$("#india_zip").val("")
 		$("#nationality").val("");
 	}
 });
