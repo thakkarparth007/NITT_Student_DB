@@ -1,0 +1,77 @@
+#tabWrapper {
+	margin: 0;
+	/*background: blue;*/
+}
+.exxtra {
+	display: none;
+}
+
+a.tab {
+	padding: 10px 1%;
+	width: 30.5%;
+	text-align: center;
+}
+
+form {
+	border: none;
+	margin: 40px auto;
+	padding: 10px 20px;
+}
+
+.page {
+	margin-left: 13%;
+}
+
+label {
+	margin: 10px 20px 0 0;
+	font-size: 16px;
+	width: 230px;
+	display: block;
+	float: none;
+}
+input, textarea, select {
+	width: 240px;
+}
+input[type="tel"], select {
+	display: block;
+	float: none;
+	width: 258px;
+}
+.error {
+	float:none;
+	display: block;
+}
+.success {
+	float: none;
+	display: block;
+}
+
+#expr_container {
+	margin-top: 20px;
+}
+
+.past_expr_rem, #past_expr_add {
+	padding: 5px;
+	width: 55px;
+}
+
+#past_expr_add {
+	margin-top: 0;
+}
+
+input[id^="past_expr"] {
+	width: 160px;
+}
+
+.past_expr_rem {
+	margin-left: 5px;
+	margin-top: 12px;
+}
+
+.past_expr_span {
+	display: block;
+}
+
+#error_message_text {
+	min-width: 300px;
+}

@@ -1,0 +1,279 @@
+/*
+Handles styling for the devices whose width is greater than 600px.
+Uses 2 media queries. The UI changes slightly at 750px and 950px.
+
+The third piece of code, the one that handles devices below 600px 
+is in a separate file since that is relatively larger than the 
+codes for 750px and 950px displays.
+ */
+
+html, body {
+	font-family: calibri;
+	margin: 0;
+	padding: 0;
+}
+
+#tabContainer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 40px;
+	background: white;
+	box-shadow: 0 2px 10px 0 #000;
+	z-index: 1000;
+}
+
+#tabWrapper {
+	margin: 0 5% 0 5%;
+}
+
+a.tab {
+	text-decoration: none;
+	padding: 10px 0 10px 2%;
+	height: 20px;
+	width: 31%;
+	margin: 0;
+	font: 16px verdana;
+	display: inline-block;
+	background: grey;
+	color: white;
+	cursor: default;
+
+	-webkit-transition: all 0.25s;
+	-moz-transition: all 0.25s;
+	-o-transtion: all 0.25s;
+	-ms-transition: all 0.25s;
+	transition: all 0.25s;
+}
+
+a.tab.active {
+	background: green;
+	cursor: pointer;
+}
+
+a.tab.active:hover, a.tab.active:focus {
+	box-shadow: 0 0 8px 0 #000 inset;
+}
+
+form {
+	border: 1px solid #109496;
+	margin: 40px 5% 40px 5%;
+	padding-top: 10px;
+}
+
+.page {
+	margin-left: 25%;
+}
+
+p {
+	padding: 0;
+	margin: 0 0 -20px 0;
+}
+
+#p_india_addr,#p_india_addr_label,#hr_following_india_addr {
+	display: none;
+}
+
+label {
+	width: 26%;
+	float: left;
+	display: inline-block;
+	margin: 10px 20px;
+	font-size: 20px;
+}
+input, textarea, select {
+	width: 200px;
+	margin: 10px 0;
+	padding: 8px;
+	border-radius: 2px;
+	border:1px solid black;
+	
+	-webkit-transition: all 0.25s;
+	-moz-transition: all 0.25s;
+	-o-transtion: all 0.25s;
+	-ms-transition: all 0.25s;
+	transition: all 0.25s;
+}
+textarea {
+	height: 100px;
+}
+input[type="tel"], select {
+	width: 218px;
+}
+input:focus, textarea:focus, select:focus {
+	box-shadow: 0 0 10px 0 #109496;
+	-webkit-outline: none;
+	-moz-outline: none;
+	-o-outline: none;
+	-ms-outline: none;
+	outline: none;
+}
+br {
+	clear: both;
+}
+.error {
+	color: red;
+}
+.success {
+	color: green;
+	display: none;
+}
+#expr_container {
+	float: left;
+}
+
+.past_expr_rem, #past_expr_add {
+	text-decoration: none;
+	background: lightblue;
+	box-shadow: 0 0 5px 0 #000;
+	border-radius: 5px;
+	padding: 5px 10px;
+	width: 60px;
+	display: inline-block;
+	text-align: center;
+	color: white;
+	font-weight: bold;
+
+	-webkit-transition: all 0.25s;
+	-moz-transition: all 0.25s;
+	-o-transtion: all 0.25s;
+	-ms-transition: all 0.25s;
+	transition: all 0.25s;
+}
+
+.past_expr_rem {
+	margin-left: 10px;
+}
+
+#past_expr_add {
+	margin-top: 10px;
+}
+
+.past_expr_rem:hover, .past_expr_rem:focus,
+#past_expr_add:hover, #past_expr_add:focus {
+	background: blue;
+}
+
+.past_expr_span {
+	display: block;
+}
+
+#Submit, #button_at_bottom {
+	text-decoration: none;
+	background: lightblue;
+	box-shadow: 0 0 5px 0 #000;
+	border-radius: 5px;
+	padding: 10px;
+	border: none;
+	display: inline-block;
+	text-align: center;
+	color: white;
+	font-weight: bold;
+	margin: 10px 0 20px 50%;
+	transform: translate(-50%, 0);
+
+	-webkit-transition: all 0.25s;
+	-moz-transition: all 0.25s;
+	-o-transtion: all 0.25s;
+	-ms-transition: all 0.25s;
+	transition: all 0.25s;
+}
+
+#button_at_bottom:hover, #button_at_bottom:focus,
+#Submit:hover, #Submit:focus {
+	background: blue;
+}
+
+#Submit[disabled="disabled"], #button_at_bottom.disabled {
+	background: grey;
+	color: lightgrey;
+}
+
+#error_message {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(255,255,255,0.7);
+	display:none;
+	z-index: 2000;
+}
+
+#error_message_text {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: green;
+	font-size: 40px;
+	border: 1px solid darkgreen;
+	padding: 50px;
+	background: white;
+	text-align: center;
+}
+
+#roomno {
+	width: 50px;
+}
+
+#hostel {
+	width: 145px;
+}
+
+p.info_group_label {
+	color: Grey;
+	font-size: 30px;
+	margin-bottom: 0;
+}
+
+hr {
+	margin-left: -10%;
+	margin-right: 20%;
+}
+
+/* medium display */
+
+@media(max-width: 950px) {
+	#tabWrapper {
+		margin: 0 5% 0 5%;
+		/*background: red;*/
+	}
+
+	.extra {
+		display: none;
+	}
+
+	a.tab {
+		width: 30.8%;
+	}
+
+	label {
+		width: 23%;
+	}
+
+	.page {
+		margin-left: 15%;
+	}
+
+	#error_message_text {
+		font-size: 32px;
+		padding: 40px;
+		min-width: 350px;
+	}
+}
+
+/* small display */
+@media(max-width: 750px) {	
+	#tabWrapper {
+		margin: 0 2% 0 2%;
+		/*background: orange;*/
+	}
+	.page {
+		margin-left: 7%;
+	}
+	label {
+		width: 19%;
+	}
+}
