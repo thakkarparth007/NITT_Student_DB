@@ -18,7 +18,7 @@ html, body {
 	left: 0;
 	right: 0;
 	top: 0;
-	height: 85px;
+	/*height: 85px;*/
 	background: #92ee92;
 	box-shadow: 0 2px 10px 0 #000;
 	z-index: 1000;
@@ -26,6 +26,7 @@ html, body {
 
 #top_bar {
 	margin: 0 5% 0 5%;
+	min-height: 60px;
 }
 
 #message {
@@ -36,6 +37,16 @@ html, body {
 	color: black;
 	font-size: 19px;
 	width: 80%;
+}
+
+.large {
+	display: inline;
+}
+.small {
+	display: none;
+}
+.vsmall {
+	display: none;
 }
 
 #footer {
@@ -100,7 +111,7 @@ a.tab.active:hover, a.tab.active:focus {
 form {
 	border: 1px solid #109496;
 	margin: 85px 5% 20px 5%;
-	padding-top: 10px;
+	padding-top: 30px;
 }
 
 .page {
@@ -160,49 +171,11 @@ br {
 	color: green;
 	display: none;
 }
-#expr_container {
-	float: left;
-}
 
-.past_expr_rem, #past_expr_add {
-	text-decoration: none;
-	background: lightblue;
-	box-shadow: 0 0 5px 0 #000;
-	border-radius: 5px;
-	padding: 5px 10px;
-	width: 60px;
-	display: inline-block;
-	text-align: center;
-	color: white;
-	font-weight: bold;
-
-	-webkit-transition: all 0.25s;
-	-moz-transition: all 0.25s;
-	-o-transtion: all 0.25s;
-	-ms-transition: all 0.25s;
-	transition: all 0.25s;
-}
-
-.past_expr_rem {
-	margin-left: 10px;
-}
-
-#past_expr_add {
-	margin-top: 10px;
-}
-
-.past_expr_rem:hover, .past_expr_rem:focus,
-#past_expr_add:hover, #past_expr_add:focus {
-	background: blue;
-}
-
-.past_expr_span {
-	display: block;
-}
 
 #Submit, #button_at_bottom {
 	text-decoration: none;
-	background: lightblue;
+	background: darkgreen;
 	box-shadow: 0 0 5px 0 #000;
 	border-radius: 5px;
 	padding: 10px;
@@ -299,7 +272,7 @@ hr {
 	}
 	#message {
 		margin: 0;
-		margin-left: 5%;
+		/*margin-left: 5%;*/
 		font-size: 17px;
 		padding-top: 11px;
 	}
@@ -330,7 +303,7 @@ hr {
 		padding-top: 10px;
 		display: inline-block;;
 		float: left;
-		margin-right: 200px;
+		/*margin-right: 200px;*/
 	}
 
 	.extra {
@@ -354,6 +327,8 @@ hr {
 		padding: 40px;
 		min-width: 350px;
 	}
+
+
 }
 
 /* small display */
@@ -367,5 +342,29 @@ hr {
 	}
 	label {
 		width: 19%;
+	}
+	#frm {
+		padding-top: 50px;	
+	}
+	#message {
+		padding: 10px 0px;
+	}
+	.small {
+		display: inline;
+	}
+	.large {
+		display: none;
+	}
+}
+
+@media(max-width: 560px) {	
+	#top_bar {
+		margin: 0 10px;
+	}
+	.vsmall {
+		display: block;
+	}
+	#message {
+		width: 70%;
 	}
 }

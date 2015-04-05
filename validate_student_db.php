@@ -237,28 +237,16 @@ function validate_nationality() {
 
 
 //page 3
-function validate_father_name() {
-	$name = sanitize_input($_POST['father_name']);
+function validate_guardian_name() {
+	$name = sanitize_input($_POST['guardian_name']);
 	return _validate_name($name);
 }
-function validate_father_email() {
-	$email = sanitize_input($_POST['father_email']);
+function validate_guardian_email() {
+	$email = sanitize_input($_POST['guardian_email']);
 	return _validate_email($email);
 }
-function validate_father_contact() {
-	$contact = sanitize_input($_POST['father_contact1']);
-	return _validate_contact($contact);
-}
-function validate_mother_name() {
-	$name = sanitize_input($_POST['mother_name']);
-	return _validate_name($name);
-}
-function validate_mother_email() {
-	$email = sanitize_input($_POST['mother_email']);
-	return _validate_email($email);
-}
-function validate_mother_contact() {
-	$contact = sanitize_input($_POST['mother_contact1']);
+function validate_guardian_contact() {
+	$contact = sanitize_input($_POST['guardian_contact1']);
 	return _validate_contact($contact);
 }
 function validate_emergency_name() {
@@ -337,12 +325,9 @@ function validate() {
 	$err['nationality'] = validate_nationality();
 
 	// page 3
-	$err['father_name'] 	= validate_father_name();
-	$err['father_email'] 	= validate_father_email();
-	$err['father_contact'] 	= validate_father_contact();
-	$err['mother_name'] 	= validate_mother_name();
-	$err['mother_email'] 	= validate_mother_email();
-	$err['mother_contact'] 	= validate_mother_contact();
+	$err['guardian_name'] 	= validate_guardian_name();
+	$err['guardian_email'] 	= validate_guardian_email();
+	$err['guardian_contact']= validate_guardian_contact();
 	$err['emergency_name'] 	= validate_emergency_name();
 	$err['emergency_relation'] 	= validate_emergency_relation();
 	$err['emergency_contact'] 	= validate_emergency_contact();

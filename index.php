@@ -48,7 +48,8 @@ else {
 	<div id="tabContainer">
 		<div id="top_bar">
 			<div id="message">
-				National Institute of Technology Tiruchirappalli Student Database (For official use only). Please fill out the form carefully.
+				<span class="large">National Institute of Technology Tiruchirappalli</span><span class="small">NIT Trichy</span> 
+				Student Database <br class="vsmall">(For official use only). <span class="large">Please fill out the form carefully.</span>
 			</div>
 
 			<a id="logout" href="logout.php">Logout</a>
@@ -271,54 +272,28 @@ else {
 	</div>
 	<div id="page3" class="page">
 		<p class="info_group_label">
-			Father's details
+			Guardian's details
 		</p>
 		<p>
-			<label for="father_name">Name</label>
-			<input type="text" name="father_name" id="father_name">
-			<span id="succfather_name" class="success">✓ Valid</span><span id="errfather_name" class="error"></span>
+			<label for="guardian_name">Name</label>
+			<input type="text" name="guardian_name" id="guardian_name">
+			<span id="succguardian_name" class="success">✓ Valid</span><span id="errguardian_name" class="error"></span>
 		</p>
 		<br>
 
 		<p>
-			<label for="father_email">Email Id</label>
-			<input type="email" name="father_email" id="father_email">
-			<span id="succfather_email" class="success">✓ Valid</span><span id="errfather_email" class="error"></span>
+			<label for="guardian_email">Email Id</label>
+			<input type="email" name="guardian_email" id="guardian_email">
+			<span id="succguardian_email" class="success">✓ Valid</span><span id="errguardian_email" class="error"></span>
 		</p>
 		<br>
 
 		<p>
-			<label for="father_contact">Contact</label>
-			<input type="tel" name="father_contact" id="father_contact">
-			<span id="succfather_contact" class="success">✓ Valid</span><span id="errfather_contact" class="error"></span>
+			<label for="guardian_contact">Contact</label>
+			<input type="tel" name="guardian_contact" id="guardian_contact">
+			<span id="succguardian_contact" class="success">✓ Valid</span><span id="errguardian_contact" class="error"></span>
 		</p>
 		<br>
-
-		<hr>
-		<p class="info_group_label">
-			Mother's details
-		</p>
-		<p>
-			<label for="mother_name">Name</label>
-			<input type="text" name="mother_name" id="mother_name">
-			<span id="succmother_name" class="success">✓ Valid</span><span id="errmother_name" class="error"></span>
-		</p>
-		<br>
-
-		<p>
-			<label for="mother_email">Email Id</label>
-			<input type="email" name="mother_email" id="mother_email">
-			<span id="succmother_email" class="success">✓ Valid</span><span id="errmother_email" class="error"></span>
-		</p>
-		<br>
-
-		<p>
-			<label for="mother_contact">Contact</label>
-			<input type="tel" name="mother_contact" id="mother_contact">
-			<span id="succmother_contact" class="success">✓ Valid</span><span id="errmother_contact" class="error"></span>
-		</p>
-		<br>
-
 
 		<hr>
 		<p class="info_group_label">
@@ -387,8 +362,7 @@ else {
 		<input type="hidden" name="MAX_FILE_SIZE" value="16000">
 		<input type="hidden" name="contact1" id="contact1">
 		<input type="hidden" name="sec_contact1" id="sec_contact1">
-		<input type="hidden" name="father_contact1" id="father_contact1">
-		<input type="hidden" name="mother_contact1" id="mother_contact1">
+		<input type="hidden" name="guardian_contact1" id="guardian_contact1">
 		<input type="hidden" name="emergency_contact1" id="emergency_contact1">
 		<a id="button_at_bottom" class="disabled">Complete Part 1 to proceed</a>
 		<input type="submit" name="Submit" id="Submit" disabled="disabled" value="Submit">
@@ -406,7 +380,7 @@ else {
 	<script type="text/javascript" src="js/student_db_details.js"></script>
 	<script type="text/javascript" src="js/intl-tel-input/build/js/intlTelInput.min.js"></script>
 	<script type="text/javascript">
-		$("#contact,#sec_contact,#father_contact,#mother_contact,#emergency_contact").intlTelInput({
+		$("#contact,#sec_contact,#guardian_contact,#mother_contact,#emergency_contact").intlTelInput({
 			defaultCountry: "in",
 			utilsScript: "js/intl-tel-input/lib/libphonenumber/build/utils.js"
 		});

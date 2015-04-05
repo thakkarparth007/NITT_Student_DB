@@ -276,8 +276,8 @@ var part2 = [
 
 var part3 = [
 {
-	name: "father_name",
-	readable_name: "Father's Name",
+	name: "guardian_name",
+	readable_name: "Guardian's Name",
 	type: "text",
 	required: true,
 	rule: function(s) {
@@ -287,8 +287,8 @@ var part3 = [
 	}
 },
 {
-	name: "father_email",
-	readable_name: "Father's Email",
+	name: "guardian_email",
+	readable_name: "Guardian's Email",
 	type: "email",
 	required: true,
 	rule: function(s) {
@@ -298,41 +298,8 @@ var part3 = [
 	}
 },
 {
-	name: "father_contact",
-	readable_name: "Father's Contact",
-	type: "tel",
-	required: true,
-	rule: function(s) {
-		if(!/^[0\+]\d{12,13}$/.test(s))		return "Enter a valid mobile number";
-
-		return false;
-	}
-},
-{
-	name: "mother_name",
-	readable_name: "Mother's Name",
-	type: "text",
-	required: true,
-	rule: function(s) {
-		if(s.length > 50) 				return "Name can not exceed 50 characters";
-		if(!/^[a-zA-Z \.']+$/.test(s)) 	return "Enter a valid name";
-		return false;
-	}
-},
-{
-	name: "mother_email",
-	readable_name: "Mother's Email",
-	type: "email",
-	required: true,
-	rule: function(s) {
-		if(!/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(s))
-			return "Enter a valid email id";
-		return false;
-	}
-},
-{
-	name: "mother_contact",
-	readable_name: "Mother's Contact",
+	name: "guardian_contact",
+	readable_name: "Guardian's Contact",
 	type: "tel",
 	required: true,
 	rule: function(s) {

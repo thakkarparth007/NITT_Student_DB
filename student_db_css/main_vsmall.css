@@ -75,3 +75,11 @@ input[id^="past_expr"] {
 #error_message_text {
 	min-width: 300px;
 }
+
+#frm {
+	padding-top: 80px;	
+}
+
+@media(max-width: 450px) {
+	
+}
