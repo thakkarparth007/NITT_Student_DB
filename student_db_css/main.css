@@ -251,6 +251,11 @@ hr {
 	clear: both;
 }
 
+.emergency_advise {
+	color: grey; font-size: 20px;
+	display: block;
+}
+
 @media(max-width: 1165px) {
 	#tabContainer {
 		/*background: red;*/

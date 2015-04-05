@@ -298,6 +298,8 @@ else {
 		<hr>
 		<p class="info_group_label">
 			Emergency Contact details
+			<br>
+			<span class="emergency_advise">The person must be residing in Trichy (e.g, your friend/uncle)
 		</p>
 		<p>
 			<label for="emergency_name">Name</label>

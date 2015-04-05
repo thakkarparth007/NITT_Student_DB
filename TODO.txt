@@ -1,5 +1,3 @@
 TODO:
 
-1. Requires proper testing.
-2. Remove father's and mother's details, and have "guardian's details"
-3. For emergency contact - mention that the person must be in Trichy
+Chilling.
